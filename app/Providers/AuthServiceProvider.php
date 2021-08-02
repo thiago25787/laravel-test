@@ -27,6 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('user', function (User $user) {
+            return $user && $user->profile == ProfileEnum::ADMIN;
+        });
         Gate::define('approve', function (User $user) {
             return $user && $user->profile == ProfileEnum::ADMIN;
         });

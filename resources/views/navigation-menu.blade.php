@@ -28,6 +28,11 @@
                             {{ __('Approve deposit') }}
                         </x-jet-nav-link>
                     @endcan
+                    @can('user')
+                        <x-jet-nav-link href="{{ route('user') }}" :active="request()->routeIs('user')">
+                            {{ __('User') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 

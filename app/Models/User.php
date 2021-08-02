@@ -56,4 +56,14 @@ class User extends Authenticatable
     protected $appends = [
 
     ];
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, "id", "user_id");
+    }
+
+    public function listAll($pagination = 10)
+    {
+        return $this->with(["account"])->orderBy("nome")->paginate($pagination);
+    }
 }

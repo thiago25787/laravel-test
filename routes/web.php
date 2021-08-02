@@ -23,5 +23,6 @@ Route::prefix("/")->middleware("auth")->group(function() {
         Route::get('/approve', \App\Http\Livewire\Deposit\Approve::class)->name('deposit.approve');
     });
     Route::get('/purchase', \App\Http\Livewire\Purchase\Index::class)->name('purchase');
+    Route::get('/user', \App\Http\Livewire\User\Index::class)->name('user');
 });
 
