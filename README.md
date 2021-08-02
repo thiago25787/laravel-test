@@ -1,0 +1,5 @@
+- composer install
+- php artisan ui tall
+- php artisan jetstream:install livewire
+- npm install
+- npm run dev
