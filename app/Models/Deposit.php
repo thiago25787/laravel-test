@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Exceptions\AppException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +15,8 @@ class Deposit extends Model
         "amount",
         "image",
         "approve",
-        "user_approve_id",
-        "user_deny_id",
+        "user_id_approved",
+        "user_id_denied",
     ];
 
     protected $casts = [
@@ -78,7 +77,7 @@ class Deposit extends Model
         DB::transaction(function() use($deposit, $user, &$saved){
             $deposit->fill([
                 "approve" => true,
-                "user_id_approve" => $user->id,
+                "user_id_approved" => $user->id,
             ]);
             $deposit->save();
             $deposit->account->amount += $deposit->amount;
