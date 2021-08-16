@@ -2,19 +2,14 @@
 
 namespace App\Models;
 
-use App\Enums\ProfileEnum;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +30,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
     ];
 
     /**
@@ -45,25 +38,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'profile' => ProfileEnum::class,
+        'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-
-    ];
-
-    public function account()
-    {
-        return $this->belongsTo(Account::class, "id", "user_id");
-    }
-
-    public function listAll($pagination = 10)
-    {
-        return $this->with(["account"])->orderBy("nome")->paginate($pagination);
-    }
 }

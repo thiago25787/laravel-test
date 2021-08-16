@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return redirect('login'); });
-Route::get('/login', \App\Http\Livewire\Auth\Login::class)->name('login');
-
-Route::prefix("/")->middleware("auth")->group(function() {
-    Route::get('/dashboard', \App\Http\Livewire\Account\Balance::class)->name('dashboard');
-    Route::prefix("/deposit")->group(function(){
-        Route::get('/', \App\Http\Livewire\Deposit\Index::class)->name('deposit');
-        Route::get('/approve', \App\Http\Livewire\Deposit\Approve::class)->name('deposit.approve');
-    });
-    Route::get('/purchase', \App\Http\Livewire\Purchase\Index::class)->name('purchase');
-    Route::get('/user', \App\Http\Livewire\User\Index::class)->name('user');
+Route::get('/', function () {
+    return view('welcome');
 });
-
