@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\ProfileEnum;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,7 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        Gate::define('user', function (User $user) {
+            return $user && $user->profile == ProfileEnum::ADMIN;
+        });
+        Gate::define('approve', function (User $user) {
+            return $user && $user->profile == ProfileEnum::ADMIN;
+        });
+        Gate::define('account', function (User $user) {
+            return $user && in_array($user->profile, ProfileEnum::getValues());
+        });
     }
 }

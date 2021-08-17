@@ -12,6 +12,8 @@
         "hallindavid/manny": "^1.01",
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
+        "prettus/l5-repository": "^2.7",
         "upinside/laravel-make-trait": "^1.1"
     },
     "require-dev": {
@@ -39,7 +41,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan storage:link"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi"
