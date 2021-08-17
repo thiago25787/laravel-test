@@ -6,7 +6,6 @@ use App\Enums\ProfileEnum;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AuthServiceProvider extends ServiceProvider
 {

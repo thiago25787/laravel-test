@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,20 +13,19 @@ class Account extends Model
         "amount",
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, "user_id", "id");
     }
 
-    public function deposits(){
+    public function deposits()
+    {
         return $this->hasMany(Deposit::class, "account_id", "id");
     }
 
-    public function purchases(){
+    public function purchases()
+    {
         return $this->hasMany(Purchase::class, "account_id", "id");
-    }
-
-    public function getByUser(User $user){
-        return $this->where("user_id", $user->id)->first();
     }
 
 }

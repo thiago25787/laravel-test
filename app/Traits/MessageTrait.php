@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Session;
+
 trait MessageTrait
 {
     public function success($message){
@@ -21,7 +23,9 @@ trait MessageTrait
     }
 
     public function message($message, $type = 'success'){
-        session()->flash('flash.banner', $message);
-        session()->flash('flash.bannerStyle', $type);
+        if($type == "error"){
+            $type = "danger";
+        }
+        Session::flash($type, $message);
     }
 }
