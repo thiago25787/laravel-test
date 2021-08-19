@@ -19,7 +19,7 @@ class DepositValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:0.01',
             'image' => 'required|image|mimes:jpg,jpeg,png',
         ],
         ValidatorInterface::RULE_UPDATE => [

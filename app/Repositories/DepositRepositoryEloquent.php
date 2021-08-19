@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\AppException;
 use App\Models\Account;
 use App\Models\Deposit;
 use App\Models\User;
@@ -42,6 +43,9 @@ class DepositRepositoryEloquent extends BaseRepository implements DepositReposit
 
     public function approve(Deposit $deposit, User $user)
     {
+        if($this->verifyApprove($deposit)){
+            throw new AppException(__("This deposit has been updated"));
+        }
         $saved = false;
         DB::transaction(function() use($deposit, $user, &$saved){
             $deposit->fill([
@@ -57,12 +61,23 @@ class DepositRepositoryEloquent extends BaseRepository implements DepositReposit
     }
     public function deny(Deposit $deposit, User $user)
     {
+        if($this->verifyApprove($deposit)){
+            throw new AppException(__("This deposit has been updated"));
+        }
         $deposit->fill([
             "approve" => false,
             "user_id_denied" => auth()->user()->id,
         ]);
         $denied = $deposit->save();
         return $denied;
+    }
+
+    private function verifyApprove(Deposit $deposit){
+        $has_updated = false;
+        if(is_bool($deposit->approve)){
+            $has_updated = true;
+        }
+        return $has_updated;
     }
 
 }

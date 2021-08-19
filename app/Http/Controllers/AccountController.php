@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\AppException;
+use App\Http\Requests\AccountRequest;
 use App\Repositories\AccountRepository;
 use App\Repositories\DepositRepository;
 use App\Repositories\PurchaseRepository;
@@ -41,7 +42,7 @@ class AccountController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(AccountRequest $request)
     {
         Gate::authorize('account');
         try {

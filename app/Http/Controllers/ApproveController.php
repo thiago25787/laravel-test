@@ -36,20 +36,26 @@ class ApproveController extends Controller
         Gate::authorize('approve');
         try {
             $this->repository->approve($deposit, auth()->user());
+            $this->success(__("Deposit approved successfully"));
         }catch(AppException $e){
             $this->error($e->getMessage());
+        }catch(\Exception $e){
+            $this->error("Processing error");
         }
-        $this->modal = false;
-        $this->success(__("Deposit approved successfully"));
         return redirect()->route("deposit.approve");
     }
 
     public function destroy(Deposit $deposit)
     {
         Gate::authorize('approve');
-        $this->repository->deny($deposit, auth()->user());
-
-        $this->success(__("Deposit deny successfully"));
+        try {
+            $this->repository->deny($deposit, auth()->user());
+            $this->success(__("Deposit deny successfully"));
+        }catch(AppException $e){
+            $this->error($e->getMessage());
+        }catch(\Exception $e){
+            $this->error("Processing error");
+        }
         return redirect()->route("deposit.approve");
     }
 

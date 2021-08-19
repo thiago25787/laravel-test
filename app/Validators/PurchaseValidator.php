@@ -19,7 +19,7 @@ class PurchaseValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:0.01',
             'description' => 'required|max:255',
         ],
         ValidatorInterface::RULE_UPDATE => [

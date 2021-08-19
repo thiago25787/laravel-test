@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\AppException;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
@@ -25,6 +27,21 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function listAll($pagination = 10)
     {
         return $this->with(["account"])->orderBy("name")->paginate($pagination);
+    }
+
+    public function save(Array $data, User $user)
+    {
+        $user->fill([
+            "name" => $data["name"],
+            "email" => $data["email"],
+        ]);
+        if($data["new_password"]){
+            $user->fill([
+                "password" => Hash::make($data["new_password"]),
+            ]);
+        }
+        $saved = $user->save();
+        return $saved;
     }
 
 }
