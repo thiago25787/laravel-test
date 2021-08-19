@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\AppException;
 use App\Models\Account;
 use App\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -26,6 +27,19 @@ class AccountRepositoryEloquent extends BaseRepository implements AccountReposit
     public function getByUser(User $user)
     {
         return $this->where("user_id", $user->id)->first();
+    }
+
+    public function save(User $user)
+    {
+        $account = $this->getByUser($user);
+        if ($account) {
+            throw new AppException("Account already created");
+        }
+        $created = $this->create([
+            "user_id" => $user->id,
+            "amount" => 0,
+        ]);
+        return $created;
     }
 
 }

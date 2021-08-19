@@ -45,12 +45,12 @@ class UserController extends Controller
             $user = auth()->user();
             $added = $this->repository->save($request->all(), $user);
             if ($added) {
-                $msg = __('Profile updated');
+                $msg = 'Profile updated';
             }
         } catch (AppException $e) {
             $msg = $e->getMessage();
         } catch (\Exception $e) {
-            $msg = __("Unable to update");
+            $msg = "Unable to update";
         }
         if($added){
             $this->success($msg);

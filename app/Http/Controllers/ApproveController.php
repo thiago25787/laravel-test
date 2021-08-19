@@ -36,7 +36,7 @@ class ApproveController extends Controller
         Gate::authorize('approve');
         try {
             $this->repository->approve($deposit, auth()->user());
-            $this->success(__("Deposit approved successfully"));
+            $this->success("Deposit approved successfully");
         }catch(AppException $e){
             $this->error($e->getMessage());
         }catch(\Exception $e){
@@ -50,7 +50,7 @@ class ApproveController extends Controller
         Gate::authorize('approve');
         try {
             $this->repository->deny($deposit, auth()->user());
-            $this->success(__("Deposit deny successfully"));
+            $this->success("Deposit deny successfully");
         }catch(AppException $e){
             $this->error($e->getMessage());
         }catch(\Exception $e){

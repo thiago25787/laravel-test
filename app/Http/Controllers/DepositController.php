@@ -31,7 +31,7 @@ class DepositController extends Controller
         if ($account) {
             $deposits = $this->repository->listByAccount($account, $this->pagination);
         } else {
-            $this->error(__("You need to create an account first"));
+            $this->error("You need to create an account first");
             redirect()->route("account");
         }
         return view('deposit.index', [
@@ -45,7 +45,7 @@ class DepositController extends Controller
         Gate::authorize('account');
         $account = $this->accountRepository->getByUser(auth()->user());
         if(!$account){
-            $this->error(__("You need to create an account first"));
+            $this->error("You need to create an account first");
             return redirect()->route("account");
         }
         return view('deposit.create', [
@@ -66,13 +66,12 @@ class DepositController extends Controller
                 "approved" => null,
             ]);
             if($added){
-                $msg = __('Amount requested successfully');
+                $msg = 'Amount requested successfully';
             }
         } catch (AppException $e) {
             $msg = $e->getMessage();
         } catch (\Exception $e) {
-            dd($e);
-            $msg = __("Unable to add amount");
+            $msg = "Unable to add amount";
         }
         if($added){
             $this->success($msg);

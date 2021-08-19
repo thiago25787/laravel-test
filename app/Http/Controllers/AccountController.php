@@ -46,24 +46,16 @@ class AccountController extends Controller
     {
         Gate::authorize('account');
         try {
-            $created = false;
-            if ($this->repository->getByUser(auth()->user())) {
-                $msg = __("Account already created");
-            }else{
-                $created = $this->repository->create([
-                    "user_id" => auth()->user()->id,
-                    "amount" => 0,
-                ]);
-                if($created){
-                    $msg = __('Account created successfully');
-                }
+            $created = $this->repository->save(auth()->user());
+            if($created){
+                $msg = __('Account created successfully');
             }
         } catch (AppException $e) {
             $msg = $e->getMessage();
         } catch (\Exception $e) {
-            $msg = __("Unable to create new account");
+            $msg = "Unable to create new account";
         }
-        $this->message($msg, $created ? 'success' : 'error');
+        $this->message($msg ?? null, $created ? 'success' : 'error');
         return redirect()->route("account");
     }
 }

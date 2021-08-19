@@ -32,7 +32,7 @@ class PurchaseController extends Controller
         if ($account) {
             $purchases = $this->repository->listByAccount($account, $this->pagination);
         } else {
-            $this->error(__("You need to create an account first"));
+            $this->error("You need to create an account first");
             redirect()->route("home");
         }
         return view('purchase.index', [
@@ -46,7 +46,7 @@ class PurchaseController extends Controller
         Gate::authorize('account');
         $account = $this->accountRepository->getByUser(auth()->user());
         if(!$account){
-            $this->error(__("You need to create an account first"));
+            $this->error("You need to create an account first");
             return redirect()->route("account");
         }
         return view('purchase.create', [
@@ -61,12 +61,12 @@ class PurchaseController extends Controller
         try {
             $added = $this->repository->spend($request->all(), $account);
             if ($added) {
-                $msg = __('Purchase successfully');
+                $msg = 'Purchase successfully';
             }
         } catch (AppException $e) {
             $msg = $e->getMessage();
         } catch (\Exception $e) {
-            $msg = __("Unable to buy");
+            $msg = "Unable to buy";
         }
         if($added){
             $this->success($msg);

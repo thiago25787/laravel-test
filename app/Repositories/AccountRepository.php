@@ -13,4 +13,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface AccountRepository extends RepositoryInterface
 {
     public function getByUser(User $user);
+
+    public function save(User $user);
 }
