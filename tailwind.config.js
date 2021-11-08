@@ -20,7 +20,6 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
-            tableLayout: ['hover', 'focus'],
         },
     },
 

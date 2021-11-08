@@ -10,12 +10,11 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
+
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
@@ -23,8 +22,6 @@
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-            {{-- The global notification alert --}}
-            <x-notification-window />
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -43,7 +40,7 @@
         </div>
 
         @stack('modals')
+
         @livewireScripts
-        @stack('component-scripts')
     </body>
 </html>

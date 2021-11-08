@@ -12,27 +12,9 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @can('account')
-                        <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                            {{ __('Balance') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('deposit') }}" :active="request()->routeIs('deposit')">
-                            {{ __('Deposit') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('purchase') }}" :active="request()->routeIs('purchase')">
-                            {{ __('Purchase') }}
-                        </x-jet-nav-link>
-                    @endif
-                    @can('approve')
-                        <x-jet-nav-link href="{{ route('deposit.approve') }}" :active="request()->routeIs('deposit.approve')">
-                            {{ __('Approve deposit') }}
-                        </x-jet-nav-link>
-                    @endcan
-                    @can('user')
-                        <x-jet-nav-link href="{{ route('user') }}" :active="request()->routeIs('user')">
-                            {{ __('User') }}
-                        </x-jet-nav-link>
-                    @endcan
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
